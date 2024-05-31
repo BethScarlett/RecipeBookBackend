@@ -29,18 +29,21 @@ public class RecipeBookController {
     }
 
     //POST
+    //Create recipe
     @PostMapping("/recipe")
     public String createRecipe(@RequestBody Recipe recipe) {
         return " ";
     }
 
     //UPDATE
+    //Update existing recipe
     @PutMapping("/recipe")
     public Recipe updateRecipe() {
         return null;
     }
 
     //DELETE
+    //Remove existing recipe
     @DeleteMapping("/recipe")
     public String deleteRecipe() {
         return " ";
