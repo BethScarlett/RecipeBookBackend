@@ -1,6 +1,8 @@
 package com.example.RecipeBookBackend.Controller;
 
 import com.example.RecipeBookBackend.Model.Recipe;
+import com.example.RecipeBookBackend.Service.RecipeBookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,6 +10,9 @@ import java.util.List;
 @RestController
 public class RecipeBookController {
     //This is where the endpoints will go
+
+    @Autowired
+    RecipeBookService recipeBookService;
 
     //GET
     //Get a recipe
@@ -19,7 +24,7 @@ public class RecipeBookController {
     //Get all recipes
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
-        return null;
+        return recipeBookService.getAllRecipes();
     }
 
     //Get recipe by id

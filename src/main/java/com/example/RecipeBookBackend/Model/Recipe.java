@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Recipe {
 
-    private int id;
+    private long id;
     private String img;
     private String name;
     private String madeBy;
@@ -18,7 +18,7 @@ public class Recipe {
 
     }
 
-    public Recipe(int id, String img, String name, String madeBy, String desc, List<String> ingredients, List<String> steps, String category, List<String> suitableFor) {
+    public Recipe(long id, String img, String name, String madeBy, String desc, List<String> ingredients, List<String> steps, String category, List<String> suitableFor) {
         this.id = id;
         this.img = img;
         this.name = name;
@@ -30,11 +30,11 @@ public class Recipe {
         this.suitableFor = suitableFor;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
