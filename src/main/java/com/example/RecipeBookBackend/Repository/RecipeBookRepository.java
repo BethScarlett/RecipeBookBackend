@@ -12,4 +12,8 @@ public interface RecipeBookRepository extends JpaRepository<Recipe, Long> {
 
     @Query(value = "SELECT * FROM recipe", nativeQuery = true)
     List<Recipe> getAllRecipes();
+
+    List<Recipe> getAllByCategory(String category);
+
+    void deleteRecipeByid(long id);
 }

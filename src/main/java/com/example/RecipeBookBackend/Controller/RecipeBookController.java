@@ -15,43 +15,48 @@ public class RecipeBookController {
     @Autowired
     RecipeBookService recipeBookService;
 
-    //GET
-    //Get a recipe
-    @GetMapping("/recipe")
-    public Recipe getRecipe() {
-        return null;
+    //CREATE
+
+    //Create recipe
+    @PostMapping("/recipe")
+    public Recipe createRecipe(@RequestBody Recipe recipe) {
+        recipeBookService.addRecipe(recipe);
+        return recipe;
     }
 
-    //Get all recipes
+    //READ
+
+    //Get all recipes or by category
     @GetMapping("/recipes")
-    public List<Recipe> getAllRecipes() {
+    public List<Recipe> getAllRecipes(@RequestParam(required = false) String category) {
+        if (category != null) {
+            return recipeBookService.getRecipesByCategory(category);
+        }
+
         return recipeBookService.getAllRecipes();
     }
 
     //Get recipe by id
-    @GetMapping("/recipe/{id}")
-    public Recipe getRecipeByID(@RequestParam (required = false) int id) {
-        return null;
-    }
-
-    //POST
-    //Create recipe
-    @PostMapping("/recipe")
-    public String createRecipe(@RequestBody Recipe recipe) {
-        return " ";
+    @GetMapping("/recipes/{id}")
+    public Recipe getRecipeByID(@PathVariable long id) {
+        return recipeBookService.getRecipeByID(id);
     }
 
     //UPDATE
+
     //Update existing recipe
-    @PutMapping("/recipe")
-    public Recipe updateRecipe() {
-        return null;
+    @PutMapping("/recipe/{id}")
+    public Recipe updateRecipe(@RequestBody Recipe newRecipe, @PathVariable long id) {
+        recipeBookService.updateRecipe(newRecipe, id);
+        return newRecipe;
     }
 
     //DELETE
+
     //Remove existing recipe
-    @DeleteMapping("/recipe")
-    public String deleteRecipe() {
-        return " ";
+    @DeleteMapping("/recipe/{id}")
+    public String deleteRecipe(@PathVariable long id) {
+        recipeBookService.deleteRecipe(id);
+        return "Recipe removed";
     }
 }
