@@ -1,33 +1,31 @@
 package com.example.RecipeBookBackend.Model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
 public class Recipe {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String img;
     private String name;
-    private String madeBy;
-    private String desc;
-    private List<String> ingredients;
-    private List<String> steps;
+    private String description;
     private String category;
-    private List<String> suitableFor;
 
     public Recipe() {
 
     }
 
-    public Recipe(long id, String img, String name, String madeBy, String desc, List<String> ingredients, List<String> steps, String category, List<String> suitableFor) {
+    //TODO - Add all back when issue is found
+    public Recipe(long id, String img, String name, String description, String category) {
         this.id = id;
         this.img = img;
         this.name = name;
-        this.madeBy = madeBy;
-        this.desc = desc;
-        this.ingredients = ingredients;
-        this.steps = steps;
+        this.description = description;
         this.category = category;
-        this.suitableFor = suitableFor;
     }
 
     public long getId() {
@@ -54,36 +52,12 @@ public class Recipe {
         this.name = name;
     }
 
-    public String getMadeBy() {
-        return madeBy;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMadeBy(String madeBy) {
-        this.madeBy = madeBy;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public List<String> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(List<String> steps) {
-        this.steps = steps;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCategory() {
@@ -94,11 +68,4 @@ public class Recipe {
         this.category = category;
     }
 
-    public List<String> getSuitableFor() {
-        return suitableFor;
-    }
-
-    public void setSuitableFor(List<String> suitableFor) {
-        this.suitableFor = suitableFor;
-    }
 }
