@@ -1,5 +1,6 @@
 package com.example.RecipeBookBackend.Service;
 
+import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Repository.RecipeBookRepository;
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class RecipeBookService {
         Optional<Recipe> recipe = recipeBookRepository.findById(id);
 
         if(recipe.isEmpty()) {
-            throw new Error();
+            throw new RecipeNotFoundException();
         }
 
         return recipe.get();
@@ -43,7 +44,7 @@ public class RecipeBookService {
     //UPDATE
     public void updateRecipe(Recipe newRecipe, long id) {
         if(!recipeBookRepository.existsById(id)) {
-            throw new Error();
+            throw new RecipeNotFoundException();
         }
 
         newRecipe.setId(id);
@@ -54,6 +55,10 @@ public class RecipeBookService {
     //DELETE
     @Transactional
     public void deleteRecipe(long id) {
+        if(!recipeBookRepository.existsById(id)) {
+            throw new RecipeNotFoundException();
+        }
+
         recipeBookRepository.deleteRecipeByid(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.RecipeBookBackend.Controller;
 
+import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Service.RecipeBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,14 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 public class RecipeBookController {
-    //This is where the endpoints will go
 
     @Autowired
     RecipeBookService recipeBookService;
+
+    @ExceptionHandler
+    public String handleExceptions(RecipeNotFoundException exception) {
+        return exception.getMessage();
+    }
 
     //CREATE
 
