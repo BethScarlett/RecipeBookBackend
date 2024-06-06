@@ -1,6 +1,7 @@
 package com.example.RecipeBookBackend.Service;
 
 import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
+import com.example.RecipeBookBackend.Model.Ingredient;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Repository.RecipeBookRepository;
 import jakarta.transaction.Transactional;
@@ -39,6 +40,14 @@ public class RecipeBookService {
         }
 
         return recipe.get();
+    }
+
+    public List<String> getIngredientsByID(long id) {
+        return recipeBookRepository.getIngredientsByID(id);
+    }
+
+    public List<String> getStepsByID(long id) {
+        return recipeBookRepository.getStepsByID(id);
     }
 
     //UPDATE

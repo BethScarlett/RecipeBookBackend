@@ -3,6 +3,7 @@ package com.example.RecipeBookBackend.Model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "ingredient")
 public class Ingredient {
 
     @Id
@@ -37,5 +38,13 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

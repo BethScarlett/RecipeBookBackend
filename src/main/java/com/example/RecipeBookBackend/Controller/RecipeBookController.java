@@ -1,6 +1,7 @@
 package com.example.RecipeBookBackend.Controller;
 
 import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
+import com.example.RecipeBookBackend.Model.Ingredient;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Service.RecipeBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,19 @@ public class RecipeBookController {
     public Recipe getRecipeByID(@PathVariable long id) {
         return recipeBookService.getRecipeByID(id);
     }
+
+    //Get recipe ingredients by id
+    @GetMapping("/recipes/ingredients/{id}")
+    public List<String> getIngredientsByID(@PathVariable long id) {
+        return recipeBookService.getIngredientsByID(id);
+    }
+
+    //Get recipe steps by id
+    @GetMapping("/recipes/steps/{id}")
+    public List<String> getStepsByID(@PathVariable long id) {
+        return recipeBookService.getStepsByID(id);
+    }
+
 
     //UPDATE
 

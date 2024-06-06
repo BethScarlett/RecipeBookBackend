@@ -3,6 +3,7 @@ package com.example.RecipeBookBackend.Model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "steps")
 public class Steps {
 
     @Id
