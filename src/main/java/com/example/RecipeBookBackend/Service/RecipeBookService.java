@@ -1,9 +1,10 @@
 package com.example.RecipeBookBackend.Service;
 
 import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
-import com.example.RecipeBookBackend.Model.Ingredient;
 import com.example.RecipeBookBackend.Model.Recipe;
+import com.example.RecipeBookBackend.Model.Steps;
 import com.example.RecipeBookBackend.Repository.RecipeBookRepository;
+import com.example.RecipeBookBackend.Repository.StepsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,16 @@ public class RecipeBookService {
     @Autowired
     RecipeBookRepository recipeBookRepository;
 
+    @Autowired
+    StepsRepository stepsRepository;
+
     //CREATE
     public void addRecipe(Recipe recipe) {
         recipeBookRepository.save(recipe);
+    }
+
+    public void addSteps(List<Steps> steps) {
+        stepsRepository.saveAll(steps);
     }
 
     //READ
@@ -40,6 +48,10 @@ public class RecipeBookService {
         }
 
         return recipe.get();
+    }
+
+    public Long getLastRecipeID() {
+        return recipeBookRepository.getLastRecipeID();
     }
 
     public List<String> getIngredientsByID(long id) {

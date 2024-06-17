@@ -16,6 +16,9 @@ public interface RecipeBookRepository extends JpaRepository<Recipe, Long> {
 
     List<Recipe> getAllByCategory(String category);
 
+    @Query(value = "SELECT * FROM recipe ORDER BY ID DESC LIMIT 1", nativeQuery = true)
+    Long getLastRecipeID();
+
     @Query(value = "SELECT ingredient.name FROM ingredient WHERE recipe_id = ?1", nativeQuery = true)
     List<String> getIngredientsByID(long id);
 
@@ -25,3 +28,4 @@ public interface RecipeBookRepository extends JpaRepository<Recipe, Long> {
     //DELETE
     void deleteRecipeByid(long id);
 }
+
