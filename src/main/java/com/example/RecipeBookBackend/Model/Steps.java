@@ -9,12 +9,21 @@ public class Steps {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int stepNumber;
+
+    private long stepNumber;
     private String step;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
     public Steps() {
 
@@ -34,11 +43,11 @@ public class Steps {
         this.id = id;
     }
 
-    public int getStepNumber() {
+    public long getStepNumber() {
         return stepNumber;
     }
 
-    public void setStepNumber(int stepNumber) {
+    public void setStepNumber(long stepNumber) {
         this.stepNumber = stepNumber;
     }
 

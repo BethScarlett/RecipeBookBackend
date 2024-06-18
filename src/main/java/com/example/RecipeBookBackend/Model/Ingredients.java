@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ingredient")
-public class Ingredient {
+public class Ingredients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +15,13 @@ public class Ingredient {
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    public Ingredient() {
+    public Ingredients() {
 
     }
 
-    public Ingredient(long id, String name) {
+    public Ingredients(long id, String ingredient) {
         this.id = id;
-        this.name = name;
+        this.name = ingredient;
     }
 
     public long getId() {

@@ -1,12 +1,14 @@
 package com.example.RecipeBookBackend.Controller;
 
 import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
+import com.example.RecipeBookBackend.Model.Ingredients;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Model.Steps;
 import com.example.RecipeBookBackend.Service.RecipeBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,10 +33,17 @@ public class RecipeBookController {
     }
 
     @PostMapping("/steps")
-    public List<Steps> createSteps(@RequestBody List<Steps> steps) {
+    public List<Steps> createSteps(@RequestBody ArrayList<Steps> steps) {
         recipeBookService.addSteps(steps);
         return steps;
     }
+
+    @PostMapping("/ingredients")
+    public List<Ingredients> createIngredients(@RequestBody ArrayList<Ingredients> ingredients) {
+        recipeBookService.addIngredients(ingredients);
+        return ingredients;
+    }
+
 
     //READ
 
@@ -54,9 +63,10 @@ public class RecipeBookController {
         return recipeBookService.getRecipeByID(id);
     }
 
+    //TODO - Remove this
     //Get last recipe id
     @GetMapping("/recipe/last_id")
-    public Long getLastRecipeID() {
+    public Recipe getLastRecipeID() {
         return recipeBookService.getLastRecipeID();
     }
 

@@ -17,7 +17,7 @@ public class Recipe {
     private String category;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private Set<Ingredients> ingredients = new HashSet<>();
 
     public Recipe() {
 
