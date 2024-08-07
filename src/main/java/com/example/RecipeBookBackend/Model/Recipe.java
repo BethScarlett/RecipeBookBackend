@@ -2,7 +2,8 @@ package com.example.RecipeBookBackend.Model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -14,6 +15,9 @@ public class Recipe {
     private String name;
     private String description;
     private String category;
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Ingredients> ingredients = new HashSet<>();
 
     public Recipe() {
 
