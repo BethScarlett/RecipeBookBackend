@@ -47,8 +47,14 @@ public class RecipeBookController {
 
     //Login user
     @PostMapping("/login")
-    public boolean loginUser (@RequestBody Login userCredentials) {
-        return recipeBookService.loginUser(userCredentials);
+    public List<Recipe> loginUser (@RequestBody Login userCredentials) {
+        List<Recipe> userRecipes = recipeBookService.loginUser(userCredentials);
+        if (userRecipes == null) {
+            return null;
+        } else if (userRecipes.isEmpty()) {
+            userRecipes.add(new Recipe(-1, "t", "Water", "Just Water", "Glug glug"));
+        }
+        return userRecipes;
     }
 
     //READ

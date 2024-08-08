@@ -52,12 +52,12 @@ public class RecipeBookService {
         ingredientsRepository.saveAll(ingredients);
     }
 
-    public boolean loginUser (Login userCredentials) {
+    public List<Recipe> loginUser (Login userCredentials) {
         User foundUser = userRepository.findUserByEmail(userCredentials.getEmail());
-        if (foundUser == null) {
-            return false;
+        if (foundUser == null || !PasswordUtils.checkPassword(userCredentials.getPassword(), foundUser.getPassword())) {
+            return null;
         } else {
-            return PasswordUtils.checkPassword(userCredentials.getPassword(), foundUser.getPassword());
+            return recipeBookRepository.getRecipesByID(foundUser.getId());
         }
     }
     //READ
