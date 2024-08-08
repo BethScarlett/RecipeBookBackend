@@ -4,9 +4,13 @@ import com.example.RecipeBookBackend.Exceptions.RecipeNotFoundException;
 import com.example.RecipeBookBackend.Model.Ingredients;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Model.Steps;
+import com.example.RecipeBookBackend.Model.User;
 import com.example.RecipeBookBackend.Repository.IngredientsRepository;
 import com.example.RecipeBookBackend.Repository.RecipeBookRepository;
 import com.example.RecipeBookBackend.Repository.StepsRepository;
+import com.example.RecipeBookBackend.Repository.UserRepository;
+import com.example.RecipeBookBackend.Types.Login;
+import com.example.RecipeBookBackend.Utils.PasswordUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,9 @@ public class RecipeBookService {
     @Autowired
     IngredientsRepository ingredientsRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     //CREATE
     public void addRecipe(Recipe recipe) {
         recipeBookRepository.save(recipe);
@@ -45,6 +52,14 @@ public class RecipeBookService {
         ingredientsRepository.saveAll(ingredients);
     }
 
+    public List<Recipe> loginUser (Login userCredentials) {
+        User foundUser = userRepository.findUserByEmail(userCredentials.getEmail());
+        if (foundUser == null || !PasswordUtils.checkPassword(userCredentials.getPassword(), foundUser.getPassword())) {
+            return null;
+        } else {
+            return recipeBookRepository.getRecipesByID(foundUser.getId());
+        }
+    }
     //READ
     public List<Recipe> getAllRecipes() {
         return recipeBookRepository.getAllRecipes();

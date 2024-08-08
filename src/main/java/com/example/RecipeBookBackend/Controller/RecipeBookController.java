@@ -5,6 +5,7 @@ import com.example.RecipeBookBackend.Model.Ingredients;
 import com.example.RecipeBookBackend.Model.Recipe;
 import com.example.RecipeBookBackend.Model.Steps;
 import com.example.RecipeBookBackend.Service.RecipeBookService;
+import com.example.RecipeBookBackend.Types.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,17 @@ public class RecipeBookController {
         return ingredients;
     }
 
+    //Login user
+    @PostMapping("/login")
+    public List<Recipe> loginUser (@RequestBody Login userCredentials) {
+        List<Recipe> userRecipes = recipeBookService.loginUser(userCredentials);
+        if (userRecipes == null) {
+            return null;
+        } else if (userRecipes.isEmpty()) {
+            userRecipes.add(new Recipe(-1, "t", "Water", "Just Water", "Glug glug"));
+        }
+        return userRecipes;
+    }
 
     //READ
 

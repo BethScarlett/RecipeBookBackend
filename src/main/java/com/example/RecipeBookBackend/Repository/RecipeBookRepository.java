@@ -14,6 +14,9 @@ public interface RecipeBookRepository extends JpaRepository<Recipe, Long> {
     @Query(value = "SELECT * FROM recipe", nativeQuery = true)
     List<Recipe> getAllRecipes();
 
+    @Query(value = "SELECT * FROM recipe WHERE user_id = ?1", nativeQuery = true)
+    List<Recipe> getRecipesByID(long id);
+
     List<Recipe> getAllByCategory(String category);
 
     @Query(value = "SELECT * FROM recipe ORDER BY ID DESC LIMIT 1", nativeQuery = true)
